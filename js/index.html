@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h5>全排列算法</h5>
+</body>
+<script>
+    var str = prompt("请输入排列字符串(逗号分隔)：");
+    var arry = str.split(",");
+    if(arry!=null && arry.length!=0){
+        var resultArr = arrangeFunc(arry);
+        for(let i=0;i < resultArr.length; i++){
+           document.write(resultArr[i] + " ");
+        }
+    }
+
+    function arrangeFunc(arry){
+        var result=[];
+        var product = 1;
+        for(let i=0; i < arry.length;i++){
+            var item = arry[i];
+            if(item.length != 3 || (item.indexOf("A") == -1 && item.indexOf("C") == -1)){
+                result.push("非规范项");
+                continue;
+            }
+
+            var num1 = parseInt(item.slice(1,2));
+            var num2 = parseInt(item.slice(2));
+            if(item.indexOf("A") != -1){
+                product = productFunc(num1,num1-num2+1);
+            }else if(item.indexOf("C") != -1){
+                product = productFunc(num1,num1-num2+1)/productFunc(num2,1);
+            }
+
+            result.push(product);
+        }
+        return result;
+    }
+
+    function productFunc(n1,n2){
+        var result = 1;
+        for(let i= n1; i >= n2;i--){
+            result *=i;
+        }
+        return result;
+    }
+</script>
+</html>
