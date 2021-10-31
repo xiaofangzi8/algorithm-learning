@@ -16,8 +16,11 @@ public class CopyRandomList {
         Node l5 = new Node(5);
 
         l1.next = l2;
+        l1.random = l3;
         l2.next = l3;
+        l2.random = l1;
         l3.next = l4;
+        l3.random = l5;
         l4.next = l5;
 
         Node result = copyRandomList(l1);
